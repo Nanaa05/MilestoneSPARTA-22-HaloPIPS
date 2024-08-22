@@ -1,7 +1,6 @@
 import React from "react";
-import Card from "../components/card";
-import ButtonNav from "../components/button";
-
+import Card from "@/components/card";
+import ButtonNav from "@/components/button";
 const LoginMember = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-HMIF-600">
