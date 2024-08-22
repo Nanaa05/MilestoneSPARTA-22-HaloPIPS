@@ -1,16 +1,20 @@
-import React from 'react'
-import Link from 'next/link'
-
+import React from "react";
+import ButtonNav from "./components/button";
+import Card from "./components/card";
 const page = () => {
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen bg-[#3F684B]'>
-      <h1 className='text-3xl font-bold text-white mb-8'>Login</h1>
-      <div className='flex flex-row space-x-4'>
-        <Link href='/tpb' className='p-4  bg-[#BCD66A] text-black font-semibold border border-white rounded-3xl mb-4 text-center w-48 hover:bg-[#89B262] transition duration-400'>Login as TPB</Link>
-        <Link href='/memberhmif' className='p-4  bg-[#BCD66A] text-black font-semibold border border-white rounded-3xl mb-4 text-center w-48 hover:bg-[#89B262] transition duration-400'>Login as Member</Link>
-      </div>
+    <div className="flex items-center justify-center min-h-screen bg-HMIF-600">
+      <Card color="400">
+        <h1 className="text-3xl font-bold mb-8">Login</h1>
+        <ButtonNav link="/login-tpb" color="200">
+          Login as TPB
+        </ButtonNav>
+        <ButtonNav link="/login-memberhmif" color="200">
+          Login as HMIF Member
+        </ButtonNav>
+      </Card>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
