@@ -13,12 +13,12 @@ export async function GET(req: NextRequest) {
     
     let userProfile;
     if (userType === 'HMIF') {
-        const user = await db.userHMIF.findUnique({ 
+        userProfile = await db.userHMIF.findUnique({ 
             where: { id: userId },
             include: { accounts: true }
             });
     } else if (userType === 'TPB') {
-        const user = await db.userTPB.findUnique({
+        userProfile = await db.userTPB.findUnique({
             where: { id: userId },
             include: { accounts: true }
         });
@@ -41,12 +41,12 @@ export async function PUT(req: NextRequest) {
 
     let updatedUser;
     if (userType === 'HMIF') {
-        const user = await db.userHMIF.update({
+        updatedUser = await db.userHMIF.update({
             where: { id: userId },
             data: updateData 
         });
     } else if (userType === 'TPB') {
-        const user = await db.userTPB.update({
+        updatedUser = await db.userTPB.update({
             where: { id: userId },
             data: updateData 
         });
