@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { SessionProvider } from "next-auth/react";
 import "./globals.css";
-import { db } from "@/lib/db";
+import { auth } from "@/auth";
 
 const font = Poppins({ subsets: ["latin"], weight: ["600"] });
 
@@ -10,14 +11,17 @@ export const metadata: Metadata = {
   description: "",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
-    <html lang="en">
-      <body className={font.className}>{children}</body>
-    </html>
+    <SessionProvider session={session}>
+      <html lang="en">
+        <body className={font.className}>{children}</body>
+      </html>
+    </SessionProvider>
   );
 }
