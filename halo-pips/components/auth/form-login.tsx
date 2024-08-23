@@ -17,7 +17,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-export function ProfileForm() {
+interface Props {
+  role: string;
+}
+export function ProfileForm({ role }: Props) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -29,7 +32,8 @@ export function ProfileForm() {
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof loginSchema>) {
-    login(values);
+    console.log("form login role:", role);
+    login(values, role);
   }
 
   return (
@@ -44,7 +48,7 @@ export function ProfileForm() {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Username {role}</FormLabel>
               <FormControl>
                 <input
                   type="text"

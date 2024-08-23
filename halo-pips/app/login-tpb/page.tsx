@@ -6,7 +6,7 @@ const LoginTPB = () => {
     <div className="flex items-center justify-center min-h-screen bg-HMIF-600">
       <Card color="400">
         <h1 className="text-3xl font-bold mb-8">Login as TPB</h1>
-        <ProfileForm></ProfileForm>
+        <ProfileForm role="TPB"></ProfileForm>
       </Card>
     </div>
   );

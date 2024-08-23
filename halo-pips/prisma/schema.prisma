@@ -9,39 +9,56 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
+model UserHMIF {
   id       String    @id @default(cuid())
   name     String?
   username String?   @unique
   password String?
   image    String?
   kampus   String?
+  NIM      Int?
   angkatan Int?
   rate     Float?
   jurusan  String?
   idline   String?
   jabatan  String?
-  role     String?
   accounts Account[]
 
-  @@map("users")
+  @@map("UserHMIF")
+}
+
+model UserTPB {
+  id       String    @id @default(cuid())
+  name     String?
+  username String?   @unique
+  password String?
+  image    String?
+  NIM      Int?
+  angkatan Int?
+  rate     Float?
+  fakultas String?
+  accounts Account[]
+
+  @@map("UserTPB")
 }
 
 model Account {
-  id                String  @id @default(cuid())
-  userId            String  @map("user_id")
+  id                String    @id @default(cuid())
+  userId            String    @map("user_id")
   type              String
   provider          String
-  providerAccountId String  @map("provider_account_id")
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  providerAccountId String    @map("provider_account_id")
+  refresh_token     String?   @db.Text
+  access_token      String?   @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?   @db.Text
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  UserHMIF          UserHMIF? @relation(fields: [userHMIFId], references: [id])
+  userHMIFId        String?
+  UserTPB           UserTPB?  @relation(fields: [userTPBId], references: [id])
+  userTPBId         String?
 
   @@unique([provider, providerAccountId])
   @@map("accounts")

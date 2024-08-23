@@ -5,8 +5,10 @@ import {
   apiAuthPrefix,
   authRoutes,
   publicRoutes,
+  tpbRoute,
+  hmifRoute,
 } from "@/routes";
-import next from "next";
+import { auth as auth2 } from "@/auth";
 
 // Use only one of the two middleware options below
 // 1. Use middleware directly
@@ -14,22 +16,46 @@ import next from "next";
 
 // 2. Wrapped middleware option
 const { auth } = NextAuth(authConfig);
-export default auth((req) => {
+export default auth(async (req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+  const isTpbRoute = tpbRoute.includes(nextUrl.pathname);
+  const isHmifRoute = hmifRoute.includes(nextUrl.pathname);
+  const session = await auth2();
+  const role = session?.user.role;
+  console.log("middleware role:", role);
+  console.log("middleware isLogged in:", isLoggedIn);
 
   if (isApiAuthRoute) {
     return;
   }
-
+  if (isPublicRoute) {
+    return;
+  }
   if (isAuthRoute) {
     if (isLoggedIn) {
-      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+      if (role === "HMIF") {
+        return Response.redirect(new URL("/dashboard-hmif", nextUrl));
+      } else {
+        return Response.redirect(new URL("/dashboard-tpb", nextUrl));
+      }
     }
     return;
+  }
+  if (isLoggedIn) {
+    if (role === "HMIF") {
+      if (isTpbRoute) {
+        return Response.redirect(new URL("/dashboard-hmif", nextUrl));
+      }
+    } else {
+      console.log("isHmifRoute:", isHmifRoute);
+      if (isHmifRoute) {
+        return Response.redirect(new URL("/dashboard-tpb", nextUrl));
+      }
+    }
   }
 
   if (!isLoggedIn && !isPublicRoute) {

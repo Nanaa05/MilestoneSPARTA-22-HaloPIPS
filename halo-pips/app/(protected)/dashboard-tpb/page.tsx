@@ -2,11 +2,12 @@
 
 import { useSession, signOut } from "next-auth/react";
 
-const SettingsPage = () => {
+const DashBoardPage = () => {
   const session = useSession();
   const onClick = () => signOut();
   return (
     <div>
+      <h1>DASHBOARD TPB</h1>
       {JSON.stringify(session)}
       <div>
         <h5>Are you sure you want to sign out?</h5>
@@ -16,4 +17,4 @@ const SettingsPage = () => {
   );
 };
 
-export default SettingsPage;
+export default DashBoardPage;
