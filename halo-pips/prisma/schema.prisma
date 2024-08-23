@@ -18,10 +18,13 @@ model UserHMIF {
   kampus   String?
   NIM      Int?
   angkatan Int?
-  rate     Float?
+  status   String?
+  rate     Int[]     @default([0, 0, 0, 0, 0])
+  review   String[]  @default([])
   jurusan  String?
   idline   String?
   jabatan  String?
+  friends  Json[]    @default([])
   accounts Account[]
 
   @@map("UserHMIF")
@@ -37,9 +40,18 @@ model UserTPB {
   angkatan Int?
   rate     Float?
   fakultas String?
+  friends  Json[]    @default([])
   accounts Account[]
 
   @@map("UserTPB")
+}
+
+model ChatRoom {
+  chatID   String   @id
+  members  String[]
+  messages Json[]   @default([])
+
+  @@map("ChatRoom")
 }
 
 model Account {
