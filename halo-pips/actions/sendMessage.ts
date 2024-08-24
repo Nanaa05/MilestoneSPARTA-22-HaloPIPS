@@ -2,6 +2,7 @@
 import * as z from "zod";
 import { chatSchema } from "@/schemas";
 import { db } from "@/lib/db";
+import { Prisma } from "@prisma/client";
 
 interface Props {
   chatID: string;
@@ -21,14 +22,39 @@ export const send = async (
     return;
   }
   const currentTime = new Date();
-  const updateChat = await db.chatRoom.update({
+
+  let chatRoom = await db.chatRoom.findUnique({
     where: {
       chatID: chatID,
     },
-    data: {
-      messages: [
-        { content: message, time: currentTime, userID: userID, read: false },
-      ],
-    },
   });
+  let messages = chatRoom?.messages;
+
+  const newMessages = {
+    content: message,
+    time: currentTime.toString(),
+    userID: userID,
+    read: false,
+  };
+
+  messages?.push(newMessages);
+  if (messages !== null)
+    await db.chatRoom.update({
+      where: {
+        chatID: chatID,
+      },
+      data: {
+        messages: messages,
+      },
+    });
+  else {
+    await db.chatRoom.update({
+      where: {
+        chatID: chatID,
+      },
+      data: {
+        messages: [],
+      },
+    });
+  }
 };
