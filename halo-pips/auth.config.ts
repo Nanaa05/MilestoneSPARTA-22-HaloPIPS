@@ -1,7 +1,7 @@
 import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { loginSchema } from "./schemas";
-import { getUserHMIFByUsername, getUserTpbByUsername } from "./data/user";
+import { getUserByUsername } from "./data/user";
 import bcrypt from "bcryptjs";
 export default {
   providers: [
@@ -10,11 +10,11 @@ export default {
         const validatedFields = loginSchema.safeParse(credentials);
         if (validatedFields.success) {
           const { username, password } = validatedFields.data;
-          const userHMIF = await getUserHMIFByUsername(username);
+          const userHMIF = await getUserByUsername(username, "HMIF");
 
           if (!userHMIF) {
             console.log("user HMIF not found", userHMIF);
-            const userTPB = await getUserTpbByUsername(username);
+            const userTPB = await getUserByUsername(username, "TPB");
             if (!userTPB || !userTPB.password) {
               console.log("user TPB not found", userHMIF);
               return null;
