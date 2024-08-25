@@ -7,9 +7,15 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
 import { ChatForm } from "@/components/chat/form";
 import Messages from "./messages";
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { MenuIcon, UserIcon, XIcon, PaperclipIcon, SendIcon } from 'lucide-react'
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  MenuIcon,
+  UserIcon,
+  XIcon,
+  PaperclipIcon,
+  SendIcon,
+} from "lucide-react";
 import FriendList from "../friendReact";
 import { useRouter } from "next/navigation";
 
@@ -50,16 +56,16 @@ const Chatroom = async ({ params }: { params: { userID: string } }) => {
   });
   const messageList = chatroom?.messages;
   return (
-<div className="flex h-screen bg-HMIF-600 text-HMIF-100">
+    <div className="flex h-screen bg-HMIF-600 text-HMIF-100">
       {/* Sidebar */}
       <div className="w-1/3 bg-HMIF-600 p-4 overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
           <MenuIcon className="w-6 h-6" />
         </div>
         {/* User list */}
-          <div className="flex items-center mb-4 bg-HMIF-300 rounded-lg p-2">
-            <FriendList friendList={friendList}></FriendList>
-          </div>
+        <div className="flex items-center mb-4 bg-HMIF-300 rounded-lg p-2">
+          <FriendList friendList={friendList}></FriendList>
+        </div>
       </div>
 
       {/* Main chat area */}
@@ -72,20 +78,12 @@ const Chatroom = async ({ params }: { params: { userID: string } }) => {
           </div>
           <div className="flex items-center">
             <UserIcon className="w-6 h-6 mr-2" />
-            <XIcon className="w-6 h-6"/>
+            <XIcon className="w-6 h-6" />
           </div>
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 bg-HMIF-300 border-black">
-          {/* Sample messages */}
-          <div className="bg-green-600 rounded-lg p-2 mb-2 max-w-md">
-            <Messages chatID={chatID}></Messages>
-          </div>
-          <div className="bg-green-600 rounded-lg p-2 mb-2 max-w-md ml-auto">
-          <Messages chatID={chatID}></Messages>
-          </div>
-        </div>
+        <Messages chatID={chatID}></Messages>
 
         {/* Input area */}
         <div className="bg-HMIF-550 p-4 text-HMIF-300">

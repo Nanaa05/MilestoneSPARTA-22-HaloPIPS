@@ -44,20 +44,22 @@ const Messages = ({ chatID }: Props) => {
     messageEndRef.current?.scrollIntoView();
   }, [messages]);
   return (
-    <ScrollArea className="h-96 w-auto rounded-md border mb-2 flex flex-col-reverse">
+    <div className="flex-1 flex flex-col-reverse overflow-y-auto p-4 bg-HMIF-300 border-black">
+      <div ref={messageEndRef} />
       {/* {messages} */}
       {messages &&
-        JSON.parse(messages).map(
-          (x: any) =>
-            x && (
-              <div key={x.time}>
-                <Separator className="my-2" />
-                <div className="text-sm">{JSON.stringify(x)}</div>
-              </div>
-            )
-        )}
-      <div ref={messageEndRef} />
-    </ScrollArea>
+        JSON.parse(messages)
+          .reverse()
+          .map(
+            (x: any) =>
+              x && (
+                <div key={x.time}>
+                  <Separator className="my-2" />
+                  <div className="text-sm">{JSON.stringify(x)}</div>
+                </div>
+              )
+          )}
+    </div>
   );
 };
 
