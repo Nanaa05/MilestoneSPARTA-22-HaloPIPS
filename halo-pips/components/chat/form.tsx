@@ -59,11 +59,11 @@ export function ChatForm({ chatID, userID }: Props) {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <div className="flex justify-between">
+                <div className="flex items-center">
                   <Input
                     type="text"
-                    className="grow"
-                    placeholder="Write here..."
+                    className="flex-1 border-none"
+                    placeholder="Type a message..."
                     {...field}
                   ></Input>
                   <Button type="submit" variant={"ghost"} className="ml-2">
