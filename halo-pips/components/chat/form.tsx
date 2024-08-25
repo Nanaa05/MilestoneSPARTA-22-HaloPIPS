@@ -62,7 +62,7 @@ export function ChatForm({ chatID, userID }: Props) {
                 <div className="flex items-center">
                   <Input
                     type="text"
-                    className="flex-1 border-none"
+                    className="flex-1 border-none bg-color-white"
                     placeholder="Type a message..."
                     {...field}
                   ></Input>

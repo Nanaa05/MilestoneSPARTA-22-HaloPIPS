@@ -10,6 +10,8 @@ import Messages from "./messages";
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { MenuIcon, UserIcon, XIcon, PaperclipIcon, SendIcon } from 'lucide-react'
+import FriendList from "../friendReact";
+import { useRouter } from "next/navigation";
 
 const Chatroom = async ({ params }: { params: { userID: string } }) => {
   let validation = false;
@@ -47,24 +49,17 @@ const Chatroom = async ({ params }: { params: { userID: string } }) => {
     },
   });
   const messageList = chatroom?.messages;
-
   return (
 <div className="flex h-screen bg-HMIF-600 text-HMIF-100">
       {/* Sidebar */}
       <div className="w-1/3 bg-HMIF-600 p-4 overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
           <MenuIcon className="w-6 h-6" />
-          <span className="text-lg font-semibold">10:55</span>
         </div>
         {/* User list */}
-        {['Orang 1', 'Orang 2', 'Orang 3', 'Orang 4'].map((user, index) => (
-          <div key={index} className="flex items-center mb-4 bg-HMIF-300 rounded-lg p-2">
-            <div>
-              <div className="font-semibold">{user}</div>
-              <div className="text-xs text-yellow-200">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-            </div>
+          <div className="flex items-center mb-4 bg-HMIF-300 rounded-lg p-2">
+            <FriendList friendList={friendList}></FriendList>
           </div>
-        ))}
       </div>
 
       {/* Main chat area */}
@@ -72,27 +67,28 @@ const Chatroom = async ({ params }: { params: { userID: string } }) => {
         {/* Chat header */}
         <div className="bg-HMIF-600 p-4 flex justify-between items-center">
           <div>
-            <div className="font-semibold">Orang 1</div>
+            <div className="font-semibold">Aku siapa</div>
             <div className="text-xs">Last seen: Today at 05:00</div>
           </div>
           <div className="flex items-center">
             <UserIcon className="w-6 h-6 mr-2" />
-            <XIcon className="w-6 h-6" />
+            <XIcon className="w-6 h-6"/>
           </div>
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4" style={{
-          backgroundImage: "url('/placeholder.svg?height=400&width=800')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'bottom'
-        }}>
+        <div className="flex-1 overflow-y-auto p-4 bg-HMIF-300 border-black">
           {/* Sample messages */}
+          <div className="bg-green-600 rounded-lg p-2 mb-2 max-w-md">
+            <Messages chatID={chatID}></Messages>
+          </div>
+          <div className="bg-green-600 rounded-lg p-2 mb-2 max-w-md ml-auto">
           <Messages chatID={chatID}></Messages>
+          </div>
         </div>
 
         {/* Input area */}
-        <div className="bg-HMIF-600 p-4">
+        <div className="bg-HMIF-550 p-4 text-HMIF-300">
           <ChatForm chatID={chatID} userID={username}></ChatForm>
         </div>
       </div>
