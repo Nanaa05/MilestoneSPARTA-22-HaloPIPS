@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/auth";
-import bcrypt from "bcrypt";
-import { use } from "react";
+import { getUserTpbByUsername, getUserHMIFByUsername } from "@/data/user";
+import { error } from "console";
 
 function sortThings(
   a: string | null | undefined,
@@ -33,8 +33,15 @@ export async function POST(req: NextRequest) {
     // Buat chat ID berdasarkan urutan
     const chatID = sortList[0] + sortList[1];
 
-    // Hash ID chat menggunakan bcrypt
-    const hashedChatID = await bcrypt.hash(chatID, 10);
+    //validasi apakah chat sudah dibuat
+    const chatroom = await db.chatRoom.findUnique({
+      where: { chatID: chatID },
+    });
+    if (chatroom) {
+      return NextResponse.json({
+        error: "chat already created",
+      });
+    }
 
     // Simpan hashed chat id ke database (kalo perlu aja)
     await db.chatRoom.create({
@@ -43,43 +50,64 @@ export async function POST(req: NextRequest) {
         members: [sortList[0], sortList[1]],
       },
     });
-
-    const FriendshipExists1 = await db.friendship.findFirst({
-      where: {
-        user1: username,
-        user2: friendUsername,
-      },
-    });
-
-    const FriendshipExists2 = await db.friendship.findFirst({
-      where: {
-        user1: friendUsername,
-        user2: username,
-      },
-    });
-
-    let friendshipCreated = false;
-    // cek apakah sudah pernah berteman
-    if (!FriendshipExists1 || !FriendshipExists2) {
-      await db.friendship.createMany({
-        data: [
-          {
-            user1: username, user2: friendUsername,
-          },
-          {
-            user1: friendUsername, user2: username,
-          }
-        ],
-      })
-    };
-
+    let user;
+    let friendUser;
+    let friendshipCreated;
+    const role = session.user.role;
+    if (role === "TPB") {
+      //case TPB add friend ke HMIF
+      user = await getUserTpbByUsername(username);
+      let userFriend = user?.friends;
+      userFriend?.push({ [friendUsername]: "HMIF" });
+      db.userTPB.update({
+        where: {
+          username: user?.username,
+        },
+        data: {
+          friends: userFriend,
+        },
+      });
+      friendUser = await getUserHMIFByUsername(friendUsername);
+      let friendUserFriend = user?.friends;
+      friendUserFriend?.push({ [username]: "TPB" });
+      db.userHMIF.update({
+        where: {
+          username: user?.username,
+        },
+        data: {
+          friends: userFriend,
+        },
+      });
+    } else {
+      //case HMIF add friend ke HMIF
+      user = await getUserHMIFByUsername(username);
+      let userFriend = user?.friends;
+      userFriend?.push({ [friendUsername]: "HMIF" });
+      db.userHMIF.update({
+        where: {
+          username: user?.username,
+        },
+        data: {
+          friends: userFriend,
+        },
+      });
+      friendUser = await getUserHMIFByUsername(friendUsername);
+      let friendUserFriend = user?.friends;
+      friendUserFriend?.push({ [username]: "HMIF" });
+      db.userHMIF.update({
+        where: {
+          username: user?.username,
+        },
+        data: {
+          friends: userFriend,
+        },
+      });
+    }
 
     // Kirim respons JSON
     return NextResponse.json(
       {
         chatID: chatID,
-        hashedChatID: hashedChatID,
-        friendshipCreated: friendshipCreated,
       },
       { status: 200 }
     );
