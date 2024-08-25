@@ -1,12 +1,14 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
+import NavBar from "@/components/navbar/navBar";
 
 const DashBoardPage = () => {
   const session = useSession();
   const onClick = () => signOut();
   return (
     <div>
+      <NavBar></NavBar>
       <h1>DASHBOARD HMIF</h1>
       {JSON.stringify(session)}
       <div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
-import NavBar from "@/components/navbar/navbar";
+import NavBar from "@/components/navbar/navBar";
 
 const DashBoardPage = () => {
   const session = useSession();
