@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/auth";
 import bcrypt from "bcrypt";
-import { use } from "react";
 
 function sortThings(
   a: string | null | undefined,

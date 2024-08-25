@@ -26,6 +26,8 @@ model UserHMIF {
   jabatan  String?
   friends  Json[]    @default([])
   accounts Account[]
+  instagram String?
+  linkedin String?
 
   @@map("UserHMIF")
 }
@@ -42,6 +44,8 @@ model UserTPB {
   fakultas String?
   friends  Json[]    @default([])
   accounts Account[]
+  instagram String?
+  linkedin String?
 
   @@map("UserTPB")
 }
