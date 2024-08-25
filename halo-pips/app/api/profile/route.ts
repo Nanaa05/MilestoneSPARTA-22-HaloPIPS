@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/auth";
-import { error } from "console";
 
 // handle Get User Profile
 export async function GET(req: NextRequest) {
@@ -38,33 +37,25 @@ export async function GET(req: NextRequest) {
 export async function PUT(req: NextRequest) {
     try {
         const session = await auth();
-        const { userId, userType, ...updateData } = await req.json();
-        const username = session?.user?.name;
+        const { userId, username, instagram, linkedin } = await req.json();
 
-        if (!username) {
-            return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
-        }
-
-        let userProfile;
-        if (session?.user?.role === 'HMIF') {
-            userProfile = await db.userHMIF.findUnique({ where: {id: userId} });
-        } else if (session?.user?.role === "TPB") {
-            userProfile = await db.userTPB.findUnique({ where: {id: userId} });
-        }
-
-        if (!userProfile) {
-            return NextResponse.json({ error: 'User not found' }, { status: 404 });
-        } 
-
-        if (userProfile.username !== username) {
-            return NextResponse.json({ error: 'You can only edit your own profile' }, { status: 403 });
+        if (!session || session.user.id !== userId) {
+            return NextResponse.json({ error: "Not authenticated or unauthorized" }, { status: 401 });
         }
 
         let updatedUser;
-        if (session?.user?.role === 'HMIF') {
-            updatedUser = await db.userHMIF.findUnique({ where: {id: userId}, data: updateData });
-        } else if (session?.user?.role === 'TPB') {
-            updatedUser = await db.userTPB.findUnique({ where: {id: userId}, data: updateData });
+        if (session.user.role === 'HMIF') {
+            updatedUser = await db.userHMIF.update({
+                where: { id: userId },
+                data: { username, instagram, linkedin }
+            });
+        } else if (session.user.role === 'TPB') {
+            updatedUser = await db.userTPB.update({
+                where: { id: userId },
+                data: { username, instagram, linkedin }
+            });
+        } else {
+            return NextResponse.json({ error: "Role not supported" }, { status: 403 });
         }
 
         return NextResponse.json(updatedUser, { status: 200 });
