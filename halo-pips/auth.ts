@@ -23,20 +23,16 @@ export const {
     async jwt({ token }) {
       if (!token.sub) return token;
       const existingUserHMIF = await getUserHMIFByID(token.sub);
-      console.log("HMIF", existingUserHMIF);
 
       if (!existingUserHMIF) {
         const existingUserTPB = await getUserTpbByID(token.sub);
-        console.log("TPB", existingUserTPB);
         if (!existingUserTPB) {
           return token;
         }
         token.role = "TPB";
-        console.log("dia ke tpb");
         return token;
       }
       token.role = "HMIF";
-      console.log("dia ke hmif");
       return token;
     },
   },
