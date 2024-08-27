@@ -9,7 +9,6 @@ interface Props {
 
 const ButtonNav = ({ children, link = "", color }: Props) => {
   const router = useRouter();
-  console.log("btn bg-HMIF-" + color);
   return (
     <button
       className={"btn border-hidden bg-HMIF-" + color}

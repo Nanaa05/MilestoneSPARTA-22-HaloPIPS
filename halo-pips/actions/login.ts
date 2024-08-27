@@ -18,11 +18,11 @@ export const login = async (
   if (role == "TPB") {
     redirect = "/dashboard-tpb";
   }
-  console.log("redirect login: ", redirect);
   try {
     await signIn("credentials", {
       username,
       password,
+      role: role,
       redirectTo: redirect,
     });
   } catch (error) {
