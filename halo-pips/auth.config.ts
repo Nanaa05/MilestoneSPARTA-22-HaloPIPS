@@ -1,7 +1,7 @@
 import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { loginSchema } from "./schemas";
-import { getUserHMIFByUsername, getUserTpbByUsername } from "./data/user";
+import { getUserByUsername } from "./data/user";
 import bcrypt from "bcryptjs";
 
 export default {
@@ -21,6 +21,7 @@ export default {
         if (username || password) {
           if (role === "TPB") {
             const userTPB = await getUserTpbByUsername(username);
+
             if (!userTPB || !userTPB.password) {
               return null;
             }

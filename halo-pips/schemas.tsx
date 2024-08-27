@@ -39,3 +39,7 @@ export const loginSchema = z.object({
     message: "Password is required",
   }),
 });
+
+export const chatSchema = z.object({
+  message: z.string(),
+});
