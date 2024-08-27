@@ -20,7 +20,7 @@ export default {
         // const { username, password, role } = validatedFields.data;
         if (username || password) {
           if (role === "TPB") {
-            const userTPB = await getUserTpbByUsername(username);
+            const userTPB = await getUserByUsername(username, "TPB");
 
             if (!userTPB || !userTPB.password) {
               return null;
@@ -33,7 +33,7 @@ export default {
               return userTPB;
             }
           } else {
-            const userHMIF = await getUserHMIFByUsername(username);
+            const userHMIF = await getUserByUsername(username, "HMIF");
             if (!userHMIF || !userHMIF.password) return null;
             const passwordsMatch = await bcrypt.compare(
               password,
@@ -44,8 +44,6 @@ export default {
             }
           }
         }
-        // if (validatedFields.success) {
-        // }
         return null;
       },
     }),
