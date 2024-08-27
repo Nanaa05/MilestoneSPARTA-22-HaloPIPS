@@ -1,10 +1,10 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 
 const EditProfilePage = () => {
-  const router = useRouter();
-  const { id } = router.query;
+  const searchParams = useSearchParams();
+  const id = '1'; // dummy
   
   const [username, setUsername] = useState('');
   const [instagram, setInstagram] = useState('');
@@ -53,7 +53,7 @@ const EditProfilePage = () => {
 
       const updatedUser = await response.json();
       
-      router.push(`/profile/${id}`);
+      window.location.href = `/profile/${id}`;
     } catch (error) {
       setError("Failed to update profile");
     }

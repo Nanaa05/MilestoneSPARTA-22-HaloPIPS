@@ -1,14 +1,12 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import IdentityCard from '@/components/ui/identitycard';
 import ButtonNav from '@/components/button';
 import RatingCard from '@/components/ui/ratingcard';
 import { Avatar } from '@/components/ui/avatar';
 
 const UserProfilePage = () => {
-  const router = useRouter();
-  const { id } = router.query;
+  const id = '1'; //dummy
   const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {

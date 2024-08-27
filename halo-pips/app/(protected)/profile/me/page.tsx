@@ -1,20 +1,17 @@
 "use client"
-import React,{ useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import IdentityCard from '@/components/ui/identitycard';
 import RatingCard from '@/components/ui/ratingcard';
 import { Avatar } from '@/components/ui/avatar';
 import { MdEdit } from "react-icons/md";
-import { FaLinkedin } from "react-icons/fa";
-import { FaInstagram } from 'react-icons/fa';
-import { useRouter } from 'next/router';
+import { FaLinkedin, FaInstagram } from 'react-icons/fa';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
-
-// dekstop
-const page = () => {
-  const router = useRouter();
-  const { id } = router.query;
+const Page = () => {
   const [userProfile, setUserProfile] = useState(null);
+  const searchParams = useSearchParams();
+  const id = '1'; //masih dummy 
 
   useEffect(() => {
     if (id) {
@@ -29,16 +26,23 @@ const page = () => {
   }, [id]);
 
   if (!userProfile) return <div>Loading...</div>;
+
   return (
     <div className='flex flex-row items-center justify-center bg-bgprofile w-full h-screen bg-cover'>
       <div className='w-1/2 flex flex-col items-center'>
         <Avatar />
-        <IdentityCard id={ userProfile }/>
+        <IdentityCard id={userProfile} />
         <div className='flex flex-row p-2'>
-          <a href="#" className='bg-HMIF-600 m-2 w-10 h-10 rounded-sm flex items-center justify-center text-white text-4xl text-center'><FaLinkedin/></a>
-          <a href="#" className='bg-HMIF-600 m-2 w-10 h-10 rounded-sm flex items-center justify-center text-white text-4xl text-center'><FaInstagram/></a>
+          <a href="#" className='bg-HMIF-600 m-2 w-10 h-10 rounded-sm flex items-center justify-center text-white text-4xl text-center'>
+            <FaLinkedin />
+          </a>
+          <a href="#" className='bg-HMIF-600 m-2 w-10 h-10 rounded-sm flex items-center justify-center text-white text-4xl text-center'>
+            <FaInstagram />
+          </a>
           <div className='EditButton bg-HMIF-600 m-2 w-10 h-10 rounded-sm flex items-center justify-center text-white text-4xl text-center'>
-              <Link href={`/editprofcard?id=${id}`}><MdEdit/></Link>
+            <Link href={`/editprofcard?id=${id}`}>
+              <MdEdit />
+            </Link>
           </div>
         </div>
       </div>
@@ -50,4 +54,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page;
