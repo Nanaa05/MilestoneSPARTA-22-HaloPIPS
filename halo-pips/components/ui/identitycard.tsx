@@ -1,9 +1,8 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from 'react';
 
 type UserProfile = {
   name: string;
-  username: string;
   NIM: string;
   angkatan: string;
   status: string;
@@ -29,8 +28,8 @@ const IdentityCard: React.FC<IdentityCardProps> = ({ id }) => {
         setUserData(data);
         setLoading(false);
       } catch (error) {
-        setLoading(false)
-        throw new Error("Failed");
+        setError("Failed to fetch user data");
+        setLoading(false);
       }
     };
 
@@ -50,7 +49,7 @@ const IdentityCard: React.FC<IdentityCardProps> = ({ id }) => {
       <h3 className="font-semibold">Nama Lengkap</h3>
       <p className="font-normal text-2xl">{userData?.name || "N/A"}</p>
       <h3 className="font-semibold">Nama Panggilan</h3>
-      <p className="font-normal text-2xl">{userData?.username || "N/A"}</p>
+      <p className="font-normal text-2xl">{userData?.name || "N/A"}</p>
       <h3 className="font-semibold">NIM</h3>
       <p className="font-normal text-2xl">{userData?.NIM || "N/A"}</p>
       <h3 className="font-semibold">Angkatan</h3>

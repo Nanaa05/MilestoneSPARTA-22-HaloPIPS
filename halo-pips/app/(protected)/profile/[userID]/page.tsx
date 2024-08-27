@@ -1,33 +1,23 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+
+import React, { useEffect, useState } from 'react'; 
 import IdentityCard from '@/components/ui/identitycard';
 import ButtonNav from '@/components/button';
-import RatingCard from '@/components/ui/ratingcard';
 import { Avatar } from '@/components/ui/avatar';
 
-const UserProfilePage = () => {
-  const id = '1'; //dummy
-  const [userProfile, setUserProfile] = useState(null);
+interface UserProfilePageProps {
+  params: { userID: string };
+}
 
-  useEffect(() => {
-    if (id) {
-      const fetchUserProfile = async () => {
-        const response = await fetch(`/api/profile?id=${id}`);
-        const data = await response.json();
-        setUserProfile(data);
-      };
-
-      fetchUserProfile();
-    }
-  }, [id]);
-
-  if (!userProfile) return <div>Loading...</div>;
+const UserProfilePage: React.FC<UserProfilePageProps> = ({ params }) => {
+  const { userID } = params;  // Mengambil userID dari parameter
 
   return (
     <div className='flex flex-row items-center justify-center bg-bgprofile w-full h-screen bg-cover'>
       <div className='w-1/2 flex flex-col items-center'>
         <Avatar />
-        <IdentityCard id={userProfile} />
+        {/* Mengirimkan userID sebagai prop id ke IdentityCard */}
+        <IdentityCard id={userID} />
       </div>
       <div className='h-full w-[5px] bg-HMIF-500'></div>
       <div className='w-1/2 flex flex-col items-center'>

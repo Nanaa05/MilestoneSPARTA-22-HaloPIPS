@@ -6,24 +6,24 @@ import { Avatar } from '@/components/ui/avatar';
 import { MdEdit } from "react-icons/md";
 import { FaLinkedin, FaInstagram } from 'react-icons/fa';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { auth } from '@/auth';
 
-const Page = () => {
+const Page = async ({ params }: { params: { userID: string } }) => {
+  const session = await auth();
+  const userId = session?.user.id;
   const [userProfile, setUserProfile] = useState(null);
-  const searchParams = useSearchParams();
-  const id = '1'; //masih dummy 
 
   useEffect(() => {
-    if (id) {
-      const fetchUserProfile = async () => {
-        const response = await fetch(`/api/profile?id=${id}`);
+    const fetchUserProfile = async ()  => {
+      if (userId) {
+        const response = await fetch(`/api/profile/id=${userId}`);
         const data = await response.json();
         setUserProfile(data);
-      };
+      }
+    };
 
       fetchUserProfile();
-    }
-  }, [id]);
+  }, [userId]);
 
   if (!userProfile) return <div>Loading...</div>;
 
@@ -40,7 +40,7 @@ const Page = () => {
             <FaInstagram />
           </a>
           <div className='EditButton bg-HMIF-600 m-2 w-10 h-10 rounded-sm flex items-center justify-center text-white text-4xl text-center'>
-            <Link href={`/editprofcard?id=${id}`}>
+            <Link href={`/editprofcard?id=${userId}`}>
               <MdEdit />
             </Link>
           </div>

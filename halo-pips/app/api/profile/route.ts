@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
     try {
         const session = await auth();
         const { searchParams } = new URL(req.url);
-        const userId = searchParams.get('userId');
+        const userId = searchParams.get('id');
 
         // jika userId tidak ada gunakan id dari session
         const userProfileId = userId || session?.user?.id;

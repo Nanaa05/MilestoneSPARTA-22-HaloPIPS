@@ -7,7 +7,7 @@ import React from 'react';
 const DashBoardPage = () => {
   return (
     <div>
-        <NavBar className="navigation-bar"/>
+        <NavBar/>
         <div className='body'>
             <h1>Selamat Datang,</h1>
             <main>

@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { auth } from '@/auth';
 
-const EditProfilePage = () => {
-  const searchParams = useSearchParams();
-  const id = '1'; // dummy
-  
+const EditProfilePage = async () => {
+  const session = await auth();
+  const userId = session?.user.id; // Ambil user ID dari session
+
   const [username, setUsername] = useState('');
   const [instagram, setInstagram] = useState('');
   const [linkedin, setLinkedin] = useState('');
@@ -15,7 +15,7 @@ const EditProfilePage = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch(`/api/profile?id=${id}`);
+        const response = await fetch(`/api/profile?id=${userId}`);
         const data = await response.json();
         setUsername(data.username || '');
         setInstagram(data.instagram || '');
@@ -27,10 +27,10 @@ const EditProfilePage = () => {
       }
     };
 
-    if (id) {
+    if (userId) {
       fetchUserProfile();
     }
-  }, [id]);
+  }, [userId]);
 
   const handleSave = async () => {
     try {
@@ -40,7 +40,7 @@ const EditProfilePage = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userId: id,
+          userId: userId,
           username,
           instagram,
           linkedin,
@@ -51,9 +51,7 @@ const EditProfilePage = () => {
         throw new Error("Failed to update profile");
       }
 
-      const updatedUser = await response.json();
-      
-      window.location.href = `/profile/${id}`;
+      window.location.href = `/profile/${userId}`;
     } catch (error) {
       setError("Failed to update profile");
     }
