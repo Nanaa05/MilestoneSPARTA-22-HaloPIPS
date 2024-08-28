@@ -1,53 +1,110 @@
-.Title{
-    background-image: url(image/summer-deep-forest-landscape-in-cartoon-style-free-vector.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+@media (min-width: 0px){
+    .Title{
+        background-image: url(image/summer-deep-forest-landscape-in-cartoon-style-free-vector.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+    .Login{
+        text-align: center;
+        color: black;
+        font-size: 48px;
+        position: absolute;
+        top: 15%;
+    }
+    
+    .Button1{
+        padding: 10px;
+        text-align: center ;
+        position: absolute;
+        top: 60%;
+    }
+    
+    .TPB{
+        color: black;
+        margin: 0px 30px;
+        font-size: 20px;
+    }
+    
+    .Button2{
+        padding: 10px;
+        text-align: center;
+        position: absolute;
+        top: 70%;
+    }
+    
+    .Jurusan{
+        color: black;
+        margin: 0px 6.475px;
+        font-size: 20px;
+    }
+    
+    .Button3{
+        padding: 10px;
+        text-align: center;
+        position: absolute;
+        top: 80%;
+    }
+    
+    .Alumni{
+        color: black;
+        margin: 0px 72.3px;
+        font-size: 20px;
+    }
 }
 
-.Login{
-    text-align: center;
-    color: black;
-    font-size: 72px;
-    position: absolute;
-    top: 10%;
-}
-
-.Button1{
-    padding: 10px;
-    text-align: center ;
-    position: absolute;
-    top: 60%;
-}
-
-.TPB{
-    color: black;
-    margin-left: 90px;
-    margin-right: 90px;
-    font-size: 30px;
-}
-
-.Button2{
-    padding: 10px;
-    text-align: center;
-    position: absolute;
-    top: 70%;
-}
-
-.Jurusan{
-    color: black;
-    margin: 0px 57.22px;
-    font-size: 30px;
-}
-
-.Button3{
-    padding: 10px;
-    text-align: center;
-    position: absolute;
-    top: 80%;
-}
-
-.Alumni{
-    color: black;
-    margin: 0px 155.945px;
-    font-size: 30px;
+@media (min-width: 1024px){
+    .Title{
+        background-image: url(image/summer-deep-forest-landscape-in-cartoon-style-free-vector.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+    .Login{
+        text-align: center;
+        color: black;
+        font-size: 72px;
+        position: absolute;
+        top: 10%;
+    }
+    
+    .Button1{
+        padding: 10px;
+        text-align: center ;
+        position: absolute;
+        top: 60%;
+    }
+    
+    .TPB{
+        color: black;
+        margin-left: 90px;
+        margin-right: 90px;
+        font-size: 30px;
+    }
+    
+    .Button2{
+        padding: 10px;
+        text-align: center;
+        position: absolute;
+        top: 70%;
+    }
+    
+    .Jurusan{
+        color: black;
+        margin: 0px 57.22px;
+        font-size: 30px;
+    }
+    
+    .Button3{
+        padding: 10px;
+        text-align: center;
+        position: absolute;
+        top: 80%;
+    }
+    
+    .Alumni{
+        color: black;
+        margin: 0px 155.945px;
+        font-size: 30px;
+    }
 }

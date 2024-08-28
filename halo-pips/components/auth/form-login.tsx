@@ -48,11 +48,11 @@ export function ProfileForm({ role }: Props) {
           name="id"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>ID {role}</FormLabel>
+              <FormLabel className="text-xl">ID {role}</FormLabel>
               <FormControl>
                 <input
                   type="text"
-                  placeholder="ID"
+                  placeholder="Username"
                   {...field}
                   className="input input-bordered w-full"
                 />
@@ -66,7 +66,7 @@ export function ProfileForm({ role }: Props) {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel className="text-xl">Password</FormLabel>
               <FormControl>
                 <input
                   type="password"

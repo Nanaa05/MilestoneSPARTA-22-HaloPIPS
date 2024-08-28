@@ -3,21 +3,11 @@ import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { getFriendList } from "../friendlist";
 import { auth } from "@/auth";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Card } from "@/components/ui/card";
 import { ChatForm } from "@/components/chat/form";
 import Messages from "./messages";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import {
-  MenuIcon,
-  UserIcon,
-  XIcon,
-  PaperclipIcon,
-  SendIcon,
-} from "lucide-react";
+import NavBar from "@/components/navbar/navBar";
+import { MenuIcon, UserIcon, XIcon } from "lucide-react";
 import FriendList from "../friendReact";
-import { useRouter } from "next/navigation";
 
 const Chatroom = async ({ params }: { params: { userID: string } }) => {
   let validation = false;
@@ -58,10 +48,9 @@ const Chatroom = async ({ params }: { params: { userID: string } }) => {
   return (
     <div className="flex h-screen bg-HMIF-600 text-HMIF-100">
       {/* Sidebar */}
+
       <div className="w-1/3 bg-HMIF-600 p-4 overflow-y-auto">
-        <div className="flex justify-between items-center mb-4">
-          <MenuIcon className="w-6 h-6" />
-        </div>
+        <NavBar></NavBar>
         {/* User list */}
         <div className="flex items-center mb-4 bg-HMIF-300 rounded-lg p-2">
           <FriendList friendList={friendList}></FriendList>
@@ -73,7 +62,7 @@ const Chatroom = async ({ params }: { params: { userID: string } }) => {
         {/* Chat header */}
         <div className="bg-HMIF-500 p-4 flex justify-between items-center">
           <div>
-            <div className="font-semibold">Aku siapa</div>
+            <div className="font-semibold">{params.userID}</div>
             <div className="text-xs">Last seen: Today at 05:00</div>
           </div>
           <div className="flex items-center">
