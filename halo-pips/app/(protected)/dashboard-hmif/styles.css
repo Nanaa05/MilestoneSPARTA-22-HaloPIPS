@@ -63,7 +63,6 @@ p{
 
 .body{
     background-color: var(--hmif-700);
-    font-family: "Poppins", sans-serif;
     padding: 1vw 5vw;
     margin: 0;
     height: 120vh;
@@ -72,10 +71,12 @@ p{
 main{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 h1{
     color: var(--hmif-100);
+    font-weight: bold;
 }
 
 p{
@@ -103,7 +104,7 @@ p{
     margin: 25px 0;
     color: var(--hmif-600);
     box-shadow: 1px 1px 10px black ;
-    line-height: 4px;
+    line-height: 15px;
 }
 
 .user-foto{
@@ -130,7 +131,6 @@ p{
     border-radius: 10px;
     text-align: center;
     font-size: 18px;
-    font-family: 'Poppins', sans-serif;
     font-weight: bold;
     position: relative;
     left: 292px;
@@ -169,7 +169,8 @@ p{
 
 /* BERITA TERKINI */
 .kanan-bawah{
-    width: 43vw;
+    max-width: 43vw;
+    width: 50%;
 }
 
 .berita-terkini{
@@ -245,7 +246,6 @@ p{
     background-color: var(--hmif-100);
     color: white;
     border: none;
-    font-family: 'Poppins', sans-serif;
     font-size: 10px;
     padding: 8px;
     border-radius: 50px;

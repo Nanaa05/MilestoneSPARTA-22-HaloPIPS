@@ -13,9 +13,9 @@ const LoginHMIF = () => {
       <div className="Panel">
         <Card color="600">
           <div className="Text">
-            <h1 className="text-5xl font-bold mb-12">Login as HMIF</h1>
-            <ProfileForm role="HMIF"></ProfileForm>
+            <h1 className="font-bold mb-12">Login as HMIF</h1>
           </div>
+          <ProfileForm role="HMIF"></ProfileForm>
         </Card>
       </div>
       </div>

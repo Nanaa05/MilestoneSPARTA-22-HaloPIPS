@@ -1,6 +1,7 @@
 import React from "react";
 import ButtonNav from "@/components/button";
 import "./page.css";
+
 const page = () => {
   return (
     <div className="Title">
