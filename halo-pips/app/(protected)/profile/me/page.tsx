@@ -32,7 +32,7 @@ const Page = () => {
     }
   }, [userId]);
 
-  if (!userProfile) return <div>Loading...</div>;
+  if (!userProfile) return <div></div>;
 
   return (
     <div className="flex flex-row items-center justify-center bg-bgprofile w-full h-screen bg-cover">
@@ -53,7 +53,7 @@ const Page = () => {
             <FaInstagram />
           </a>
           <div className="EditButton bg-HMIF-600 m-2 w-10 h-10 rounded-sm flex items-center justify-center text-white text-4xl text-center">
-            <Link href={`/editprofcard?id=${userId}`}>
+            <Link href={`/profile/editprofcard?id=${userId}`}>
               <MdEdit />
             </Link>
           </div>
