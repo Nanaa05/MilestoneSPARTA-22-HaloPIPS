@@ -33,7 +33,7 @@ const Page = () => {
     }
   }, [userId]);
 
-  if (!userProfile) return <div>Loading...</div>;
+  if (!userProfile) return <div></div>;
 
   return (
     <>

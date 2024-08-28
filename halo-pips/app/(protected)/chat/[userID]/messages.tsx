@@ -68,8 +68,10 @@ const Messages = ({ chatID }: Props) => {
                   ) : (
                     <div className="flex">
                       <div className="chat chat-start">
-                        <div className="chat-bubble w-fit h-fit max-w-3/4 bg-HMIF-300 text-start text-HMIF-600">
-                          {x.content}
+                        <div className="chat-bubble max-w-3/4 w-fit h-fit bg-HMIF-300 ">
+                          <div className="w-fit max-w-full h-fit text-HMIF-600 text-start overflow-hidden pr-6">
+                            {x.content}
+                          </div>
                         </div>
                       </div>
                     </div>
