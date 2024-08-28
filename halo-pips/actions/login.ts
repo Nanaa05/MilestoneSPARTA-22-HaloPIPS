@@ -12,7 +12,7 @@ export const login = async (
   if (!validatedFields.success) {
     return { error: "Invalid fields" };
   }
-  const { username, password } = validatedFields.data;
+  const { id, password } = validatedFields.data;
   console.log("role login: ", role);
   let redirect = "/dashboard-hmif";
   if (role == "TPB") {
@@ -20,7 +20,7 @@ export const login = async (
   }
   try {
     await signIn("credentials", {
-      username,
+      id,
       password,
       role: role,
       redirectTo: redirect,

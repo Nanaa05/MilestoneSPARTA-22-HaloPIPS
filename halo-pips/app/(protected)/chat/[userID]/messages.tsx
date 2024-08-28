@@ -2,7 +2,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 import axios from "axios";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Props {
   chatID: string;

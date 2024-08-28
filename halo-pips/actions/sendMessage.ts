@@ -2,7 +2,6 @@
 import * as z from "zod";
 import { chatSchema } from "@/schemas";
 import { db } from "@/lib/db";
-import { Prisma } from "@prisma/client";
 
 interface Props {
   chatID: string;

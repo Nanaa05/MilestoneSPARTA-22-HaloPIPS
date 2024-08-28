@@ -32,8 +32,8 @@ export const createSchema = z.object({
 });
 
 export const loginSchema = z.object({
-  username: z.string().min(0, {
-    message: "Username is required",
+  id: z.string().min(0, {
+    message: "id is required",
   }),
   password: z.string().min(1, {
     message: "Password is required",
