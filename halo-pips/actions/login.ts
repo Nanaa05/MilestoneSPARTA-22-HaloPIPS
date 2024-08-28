@@ -2,7 +2,6 @@
 import * as z from "zod";
 import { loginSchema } from "@/schemas";
 import { signIn } from "@/auth";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { AuthError } from "next-auth";
 
 export const login = async (
@@ -13,17 +12,17 @@ export const login = async (
   if (!validatedFields.success) {
     return { error: "Invalid fields" };
   }
-  const { username, password } = validatedFields.data;
+  const { id, password } = validatedFields.data;
   console.log("role login: ", role);
   let redirect = "/dashboard-hmif";
   if (role == "TPB") {
     redirect = "/dashboard-tpb";
   }
-  console.log("redirect login: ", redirect);
   try {
     await signIn("credentials", {
-      username,
+      id,
       password,
+      role: role,
       redirectTo: redirect,
     });
   } catch (error) {

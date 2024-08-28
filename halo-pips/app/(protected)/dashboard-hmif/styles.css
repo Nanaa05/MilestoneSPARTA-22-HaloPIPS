@@ -1,0 +1,255 @@
+:root{
+    --hmif-700: #c6d690;
+    --hmif-600: #f9f871;
+    --hmif-500: #bcd66a;
+    --hmif-400: #89b262;
+    --hmif-300: #5f8d59;
+    --hmif-200: #3f684b;
+    --hmif-100: #294538;
+}
+
+/* DEFAULT HTML */
+h1{
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+h2{
+    display: block;
+    font-size: 1.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+h3{
+    display: block;
+font-size: 1.17em;
+margin-top: 1em;
+margin-bottom: 1em;
+margin-left: 0;
+margin-right: 0;
+font-weight: bold;
+}
+
+h4{
+    display: block;
+    margin-top: 1.33em;
+    margin-bottom: 1.33em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+img{
+    display: inline-block;
+}
+
+p{
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: 100;
+}
+
+.body{
+    background-color: var(--hmif-700);
+    padding: 1vw 5vw;
+    margin: 0;
+    height: 120vh;
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+h1{
+    color: var(--hmif-100);
+    font-weight: bold;
+}
+
+p{
+    font-size: 16px;
+}
+
+/* NAVBAR */
+.navigation-bar{
+    position: absolute;
+}
+
+/* USER */
+.kiri-atas{
+    width: 43vw;
+}
+
+.user{
+    height: 249px;
+    width: 525px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    background-color: var(--hmif-200);
+    border-radius: 15px;
+    margin: 25px 0;
+    color: var(--hmif-600);
+    box-shadow: 1px 1px 10px black ;
+    line-height: 15px;
+}
+
+.user-foto{
+    width: 50%;
+    padding: 40px;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+}
+
+.user-data{
+    padding: 15px 15px 15px 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    justify-content: space-between;
+}
+
+/* QUICK MESSAGE */
+.quick-message{
+    width: 233px;
+    height: 41px;
+    background-color: var(--hmif-500);
+    color: var(--hmif-100);
+    border-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    left: 292px;
+    box-shadow: 0px 0px 10px 0.1px black;
+}
+
+/* DAFTAR ANGGOTA */
+.daftar-anggota{
+    height: 249px;
+    width: 525px;
+    margin: 20px 0 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.daftar-anggota-tpb, .daftar-anggota-hmif{
+    width: 252px;
+    height: 210px;
+    background-color: var(--hmif-100);
+    border-radius: 9px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+.daftar-anggota-foto{
+    padding: 18px;
+    background-color: var(--hmif-200);
+    border-radius: 9px;
+}
+
+.daftar-anggota img{
+    width: 7vw;
+    background-color: var(--hmif-100);
+}
+
+/* BERITA TERKINI */
+.kanan-bawah{
+    max-width: 43vw;
+    width: 50%;
+}
+
+.berita-terkini{
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 5px;
+}
+
+.isi{
+    padding: 5px 0 5px 6px;
+    width: 100%;
+    background-color: var(--hmif-100);
+    color: var(--hmif-600);
+}
+
+.kosong{
+    padding: 5px;
+    width: 0.5%;
+    background-color: var(--hmif-200);
+    color: var(--hmif-200);
+}
+
+.berita-terkini-galeri{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    line-height: 6px;
+}
+
+.berita-terkini-galeri div{
+    margin-right: 10px;
+    padding: 2px 20px;
+    width: 260px;
+    height: 180px;
+    background-color: var(--hmif-300);
+    color: var(--hmif-600);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.berita-terkini-galeri img{
+    opacity: 0.2;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+}
+
+.berita-terkini-galeri h3{
+    font-size: 20px;
+    position: relative;
+    z-index: 100;
+}
+
+.penjelasan-singkat{
+    font-size: 8px;
+    color: var(--hmif-600);
+    position: relative;
+    z-index: 100;
+}
+
+.tanggal-unggah{
+    font-size: 10px;
+    color: white;
+    position: relative;
+    z-index: 100;
+}
+
+.detail-berita{
+    background-color: var(--hmif-100);
+    color: white;
+    border: none;
+    font-size: 10px;
+    padding: 8px;
+    border-radius: 50px;
+    margin-top: 4px;
+    position: relative;
+    z-index: 100;
+}

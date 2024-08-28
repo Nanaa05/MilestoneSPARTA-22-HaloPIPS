@@ -1,44 +1,39 @@
 import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { loginSchema } from "./schemas";
-import { getUserHMIFByUsername, getUserTpbByUsername } from "./data/user";
+import { getUserByID } from "./data/user";
 import bcrypt from "bcryptjs";
+
 export default {
   providers: [
     Credentials({
+      credentials: {
+        id: { label: "id" },
+        password: { label: "Password", type: "password" },
+        role: { label: "role" },
+      },
       async authorize(credentials) {
-        const validatedFields = loginSchema.safeParse(credentials);
-        if (validatedFields.success) {
-          const { username, password } = validatedFields.data;
-          const userHMIF = await getUserHMIFByUsername(username);
+        const id = credentials.id;
+        const password = credentials.password;
+        const role = credentials.role;
+        if (id || password) {
+          if (role === "TPB") {
+            const userTPB = await getUserByID(id, "TPB");
 
-          if (!userHMIF) {
-            console.log("user HMIF not found", userHMIF);
-            const userTPB = await getUserTpbByUsername(username);
             if (!userTPB || !userTPB.password) {
-              console.log("user TPB not found", userHMIF);
               return null;
             }
-            const passwordsMatch = await bcrypt.compare(
-              password,
-              userTPB.password
-            );
+            const passwordsMatch = bcrypt.compare(password, userTPB.password);
             if (passwordsMatch) {
-              console.log("Password match", userTPB);
-
               return userTPB;
-            } else console.log("Password dont match", userTPB);
+            }
+          } else {
+            const userHMIF = await getUserByID(id, "HMIF");
+            if (!userHMIF || !userHMIF.password) return null;
+            const passwordsMatch = bcrypt.compare(password, userHMIF.password);
+            if (passwordsMatch) {
+              return userHMIF;
+            }
           }
-
-          if (!userHMIF || !userHMIF.password) return null;
-          const passwordsMatch = await bcrypt.compare(
-            password,
-            userHMIF.password
-          );
-          if (passwordsMatch) {
-            console.log("Password match", userHMIF);
-            return userHMIF;
-          } else console.log("Password dont match", userHMIF);
         }
         return null;
       },

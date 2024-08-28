@@ -25,7 +25,7 @@ export function ProfileForm({ role }: Props) {
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      username: "",
+      id: "",
       password: "",
     },
   });
@@ -45,7 +45,7 @@ export function ProfileForm({ role }: Props) {
       >
         <FormField
           control={form.control}
-          name="username"
+          name="id"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-xl">ID {role}</FormLabel>
