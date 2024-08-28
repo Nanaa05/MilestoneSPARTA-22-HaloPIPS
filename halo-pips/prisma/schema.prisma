@@ -10,42 +10,36 @@ generator client {
 }
 
 model UserHMIF {
-  id       String    @id @default(cuid())
-  name     String?
-  username String?   @unique
-  password String?
-  image    String?
-  kampus   String?
-  NIM      Int?
-  angkatan Int?
-  status   String?
-  rate     Int[]     @default([0, 0, 0, 0, 0])
-  review   String[]  @default([])
-  jurusan  String?
-  idline   String?
-  jabatan  String?
-  friends  Json[]    @default([])
-  accounts Account[]
+  id        String   @id @unique @default(cuid())
+  name      String?
+  password  String?
+  image     String?
+  kampus    String?
+  NIM       Int?
+  angkatan  Int?
+  status    String?
+  rate      Int[]    @default([0, 0, 0, 0, 0])
+  review    String[] @default([])
+  jurusan   String?
+  jabatan   String?
+  idline    String?
   instagram String?
-  linkedin String?
+  linkedin  String?
 
   @@map("UserHMIF")
 }
 
 model UserTPB {
-  id       String    @id @default(cuid())
-  name     String?
-  username String?   @unique
-  password String?
-  image    String?
-  NIM      Int?
-  angkatan Int?
-  rate     Float?
-  fakultas String?
-  friends  Json[]    @default([])
-  accounts Account[]
+  id        String  @id @unique @default(cuid())
+  name      String?
+  password  String?
+  image     String?
+  NIM       Int?
+  angkatan  Int?
+  fakultas  String?
+  idline    String?
   instagram String?
-  linkedin String?
+  linkedin  String?
 
   @@map("UserTPB")
 }
@@ -58,24 +52,9 @@ model ChatRoom {
   @@map("ChatRoom")
 }
 
-model Account {
-  id                String    @id @default(cuid())
-  userId            String    @map("user_id")
-  type              String
-  provider          String
-  providerAccountId String    @map("provider_account_id")
-  refresh_token     String?   @db.Text
-  access_token      String?   @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?   @db.Text
-  session_state     String?
-  UserHMIF          UserHMIF? @relation(fields: [userHMIFId], references: [id])
-  userHMIFId        String?
-  UserTPB           UserTPB?  @relation(fields: [userTPBId], references: [id])
-  userTPBId         String?
+model friend {
+  id       String   @id
+  friendID String[] @default([])
 
-  @@unique([provider, providerAccountId])
-  @@map("accounts")
+  @@map("friend")
 }
