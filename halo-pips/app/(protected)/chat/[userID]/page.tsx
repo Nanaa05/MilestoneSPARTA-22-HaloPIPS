@@ -71,7 +71,7 @@ const Chatroom = async ({ params }: { params: { userID: string } }) => {
       {/* Main chat area */}
       <div className="bg-HMIF-500 flex-1 flex flex-col">
         {/* Chat header */}
-        <div className="bg-HMIF-600 p-4 flex justify-between items-center">
+        <div className="bg-HMIF-500 p-4 flex justify-between items-center">
           <div>
             <div className="font-semibold">Aku siapa</div>
             <div className="text-xs">Last seen: Today at 05:00</div>

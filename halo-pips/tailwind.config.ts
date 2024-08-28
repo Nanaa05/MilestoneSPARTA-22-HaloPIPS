@@ -1,13 +1,13 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -18,8 +18,16 @@ const config = {
       },
     },
     extend: {
+      maxWidth: {
+        "3/4": "75%",
+      },
       colors: {
-        'HMIF-600': '#294538','HMIF-500': '#3F683B','HMIF-400': '#5F8D59','HMIF-300': '#89B262','HMIF-200': '#BCD66A','HMIF-100': '#F9F871',
+        "HMIF-600": "#294538",
+        "HMIF-500": "#3F683B",
+        "HMIF-400": "#5F8D59",
+        "HMIF-300": "#89B262",
+        "HMIF-200": "#BCD66A",
+        "HMIF-100": "#F9F871",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -74,11 +82,11 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       backgroundImage: {
-        "bgprofile": "url('../public/img_36041.jpeg')",
-      }
+        bgprofile: "url('../public/img_36041.jpeg')",
+      },
     },
   },
-  plugins: [require('daisyui'),require("tailwindcss-animate")],
+  plugins: [require("daisyui"), require("tailwindcss-animate")],
   daisyui: {
     themes: false, // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
     darkTheme: "light", // name of one of the included themes for dark mode
@@ -89,8 +97,6 @@ const config = {
     logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
     themeRoot: ":root", // The element that receives theme color CSS variables
   },
+} satisfies Config;
 
-} satisfies Config
-
-
-export default config
+export default config;
