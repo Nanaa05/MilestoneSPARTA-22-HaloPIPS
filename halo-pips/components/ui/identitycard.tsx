@@ -1,7 +1,8 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 type UserProfile = {
+  id: string
   name: string;
   NIM: string;
   angkatan: string;
@@ -9,41 +10,10 @@ type UserProfile = {
 };
 
 interface IdentityCardProps {
-  id: string; // Menentukan tipe sebagai string
+  userData: UserProfile; // Menambahkan prop userData
 }
 
-const IdentityCard: React.FC<IdentityCardProps> = ({ id }) => {
-  const [userData, setUserData] = useState<UserProfile | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch(`/api/profile?id=${id}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch user data");
-        }
-        const data = await response.json();
-        setUserData(data);
-        setLoading(false);
-      } catch (error) {
-        setError("Failed to fetch user data");
-        setLoading(false);
-      }
-    };
-
-    fetchUserData();
-  }, [id]);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
-
+const IdentityCard: React.FC<IdentityCardProps> = ({ userData }) => {
   return (
     <div className="bg-HMIF-600 text-HMIF-100 rounded-xl p-6 w-3/5 shadow-lg">
       <h3 className="font-semibold">Nama Lengkap</h3>
@@ -58,6 +28,6 @@ const IdentityCard: React.FC<IdentityCardProps> = ({ id }) => {
       <p className="font-normal text-2xl">{userData?.status || "N/A"}</p>
     </div>
   );
-}
+};
 
 export default IdentityCard;

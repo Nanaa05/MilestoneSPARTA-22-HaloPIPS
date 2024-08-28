@@ -7,19 +7,28 @@ import { MdEdit } from "react-icons/md";
 import { FaLinkedin, FaInstagram } from "react-icons/fa";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import axios from "axios";
 
 const Page = () => {
-  const session = useSession();
-  const userId = session?.data?.user.id;
-  const [userProfile, setUserProfile] = useState("");
+  const { data: session } = useSession();
+  const userId = session?.user?.id;
+  const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch(`/api/profile?id=${userId}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch user profile");
+        }
+        const data = await response.json();
+        setUserProfile(data);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+
     if (userId) {
-      console.log(`profile id: ${userId}`);
-      axios
-        .get(`/api/profile?id=${userId}`, { method: "GET" })
-        .then((response) => setUserProfile(JSON.stringify(response)));
+      fetchUserProfile();
     }
   }, [userId]);
 
@@ -29,7 +38,7 @@ const Page = () => {
     <div className="flex flex-row items-center justify-center bg-bgprofile w-full h-screen bg-cover">
       <div className="w-1/2 flex flex-col items-center">
         <Avatar />
-        <IdentityCard id={userProfile} />
+        <IdentityCard userData={userProfile} />
         <div className="flex flex-row p-2">
           <a
             href="#"
