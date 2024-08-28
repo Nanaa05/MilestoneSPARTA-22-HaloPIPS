@@ -1,4 +1,3 @@
-"use client"
 import React from 'react'
 
 const RatingCard = () => {
@@ -16,17 +15,45 @@ const RatingCard = () => {
         </div>
       </div>
 
-      <div className='flex flex-row bg-HMIF-600 p-6 border rounded-b-xl w-full mt-1'>
-        <div className='flex-shrink-0 mr-4'>
-          <div className='bg-HMIF-400 w-16 h-16 rounded-full flex items-center justify-center text-white'>
-            PP
+      <div className='flex flex-col bg-HMIF-600 p-6 border rounded-b-xl w-full mt-1'>
+        <div className='flex flex-row p-2'>
+          <div className='flex-shrink-0 mr-4'>
+            <div className='bg-HMIF-400 w-16 h-16 rounded-full flex items-center justify-center text-white'>
+              PP
+            </div>
+          </div>
+          <div className='text-HMIF-400'>
+            <h1 className='text-HMIF-100 font-bold text-lg'>Anonymous</h1>
+            <p className='font-semibold text-sm'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente debitis deserunt reiciendis.
+            </p>
           </div>
         </div>
-        <div className='text-HMIF-400'>
-          <h1 className='text-HMIF-100 font-bold text-lg'>Anonymous</h1>
-          <p className='font-semibold text-sm'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente debitis deserunt reiciendis.
-          </p>
+        <div className='flex flex-row p-2'>
+          <div className='flex-shrink-0 mr-4'>
+            <div className='bg-HMIF-400 w-16 h-16 rounded-full flex items-center justify-center text-white'>
+              PP
+            </div>
+          </div>
+          <div className='text-HMIF-400'>
+            <h1 className='text-HMIF-100 font-bold text-lg'>Anonymous</h1>
+            <p className='font-semibold text-sm'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente debitis deserunt reiciendis.
+            </p>
+          </div>
+        </div>
+        <div className='flex flex-row p-2'>
+          <div className='flex-shrink-0 mr-4'>
+            <div className='bg-HMIF-400 w-16 h-16 rounded-full flex items-center justify-center text-white'>
+              PP
+            </div>
+          </div>
+          <div className='text-HMIF-400'>
+            <h1 className='text-HMIF-100 font-bold text-lg'>Anonymous</h1>
+            <p className='font-semibold text-sm'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente debitis deserunt reiciendis.
+            </p>
+          </div>
         </div>
       </div>
     </div>

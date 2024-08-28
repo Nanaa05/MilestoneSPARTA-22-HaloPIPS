@@ -12,8 +12,8 @@ export async function GET(req: NextRequest) {
 
         const { searchParams } = new URL(req.url);
         const searchName = searchParams.get('name')?.toLowerCase() || '';
-        const searchBatch = searchParams.get('angkatan') || '';
-
+        const angkatanString = searchParams.get('angkatan');
+        const angkatanInt = angkatanString ? parseInt(angkatanString, 10):null;
         // akses hanya dapat melihat dan mengechat anggota hmif (kating jurusan)
         const members = await db.userHMIF.findMany({
             where: {
@@ -25,15 +25,14 @@ export async function GET(req: NextRequest) {
                         },
                     },
                     {
-                        batch: searchBatch || undefined,
+                        angkatan: angkatanInt || undefined,
                     }
                 ]
             },
             select: {
                 id: true,
                 name: true,
-                batch: true,
-                avatarUrl: true,
+                angkatan: true,
             },
             orderBy: {
                 name: 'asc',

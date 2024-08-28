@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "./lib/db";
 import authConfig from "./auth.config";
-import { getUserHMIFByID, getUserTpbByID } from "./data/user";
+import { getUserByID } from "./data/user";
 
 export const {
   handlers: { GET, POST },
@@ -22,10 +22,10 @@ export const {
     },
     async jwt({ token }) {
       if (!token.sub) return token;
-      const existingUserHMIF = await getUserHMIFByID(token.sub);
+      const existingUserHMIF = await getUserByID(token.sub, "HMIF");
 
       if (!existingUserHMIF) {
-        const existingUserTPB = await getUserTpbByID(token.sub);
+        const existingUserTPB = await getUserByID(token.sub, "TPB");
         if (!existingUserTPB) {
           return token;
         }
